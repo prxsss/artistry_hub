@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "669054286482",
+    "project_id": "phuriphat-kittikun",
+    "storage_bucket": "phuriphat-kittikun.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669054286482:android:2e81255b258cf5b3e0c44b",
+        "android_client_info": {
+          "package_name": "com.example.artistry_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_apFNbeCvPbVGX5G9p74GV2TmWqx2kHU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
