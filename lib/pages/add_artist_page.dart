@@ -12,7 +12,7 @@ class AddArtistPage extends StatefulWidget {
 }
 
 class _AddArtistPageState extends State<AddArtistPage> {
-  DatabaseService _databaseService = DatabaseService();
+  final DatabaseService _databaseService = DatabaseService();
 
   final _formKey = GlobalKey<FormState>();
 
