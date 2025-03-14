@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:artistry_hub/pages/artistry_hub.dart';
 
+var kColorScheme = ColorScheme.fromSeed(seedColor: Color(0xff836FFF));
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -11,5 +13,16 @@ Future<void> main() async {
     persistenceEnabled: true,
   );
 
-  runApp(MaterialApp(home: ArtistryHub()));
+  runApp(
+    MaterialApp(
+      theme: ThemeData().copyWith(
+        colorScheme: kColorScheme,
+        appBarTheme: AppBarTheme().copyWith(
+          backgroundColor: kColorScheme.primary,
+          foregroundColor: kColorScheme.onPrimary,
+        ),
+      ),
+      home: ArtistryHub(),
+    ),
+  );
 }
