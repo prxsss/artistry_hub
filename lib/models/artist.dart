@@ -57,7 +57,7 @@ class Artist {
   Map<String, Object?> toJson() {
     return {
       'name': name,
-      'gender': gender.index,
+      'gender': gender.name,
       'image': image,
       'nationality': nationality,
       'outstandingAchievement': outstandingAchievement,

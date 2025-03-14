@@ -1,4 +1,7 @@
 import 'package:artistry_hub/enums/gender.dart';
+import 'package:artistry_hub/models/artist.dart';
+import 'package:artistry_hub/services/database_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddArtistPage extends StatefulWidget {
@@ -9,6 +12,8 @@ class AddArtistPage extends StatefulWidget {
 }
 
 class _AddArtistPageState extends State<AddArtistPage> {
+  DatabaseService _databaseService = DatabaseService();
+
   final _formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController();
@@ -139,7 +144,26 @@ class _AddArtistPageState extends State<AddArtistPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 60),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      final convertedGender =
+                          selectedGender!.name == 'male' ? 'boy' : 'girl';
+
+                      Artist newArtist = Artist(
+                        name: nameController.text,
+                        gender: selectedGender!,
+                        image:
+                            'https://avatar.iran.liara.run/public/$convertedGender?username=${nameController.text.trim().replaceAll(' ', '_')}',
+                        nationality: nationalityController.text,
+                        outstandingAchievement:
+                            outstandingAchievementController.text,
+                        createdAt: Timestamp.now(),
+                        updatedAt: Timestamp.now(),
+                      );
+
+                      _databaseService.addArtist(newArtist);
+
+                      Navigator.pop(context);
+                    }
                   },
                   child: const Text('Add Artist'),
                 ),

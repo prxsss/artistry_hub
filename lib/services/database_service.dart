@@ -20,4 +20,8 @@ class DatabaseService {
   Stream<QuerySnapshot> getArtists() {
     return _artistsRef.snapshots();
   }
+
+  void addArtist(Artist artist) async {
+    await _artistsRef.add(artist);
+  }
 }
