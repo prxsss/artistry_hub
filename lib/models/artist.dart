@@ -55,7 +55,7 @@ class Artist {
   }
 
   Map<String, Object?> toJson() {
-    return {
+    Map<String, Object?> json = {
       'name': name,
       'gender': gender.name,
       'image': image,
@@ -64,5 +64,9 @@ class Artist {
       'createdAt': createdAt,
       'updatedAt': updatedAt,
     };
+
+    print(json);
+
+    return json;
   }
 }

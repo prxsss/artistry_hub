@@ -1,5 +1,6 @@
 import 'package:artistry_hub/models/artist.dart';
 import 'package:artistry_hub/pages/add_artist_page.dart';
+import 'package:artistry_hub/pages/edit_artist_page.dart';
 import 'package:artistry_hub/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -50,7 +51,20 @@ class _ArtistryHubState extends State<ArtistryHub> {
                           motion: StretchMotion(),
                           children: [
                             SlidableAction(
-                              onPressed: (context) {},
+                              onPressed: (context) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    settings: RouteSettings(
+                                      name: artistId,
+                                      arguments: artist,
+                                    ),
+                                    builder:
+                                        (context) =>
+                                            EditArtistPage(artistId, artist),
+                                  ),
+                                );
+                              },
                               backgroundColor:
                                   Theme.of(context).colorScheme.primary,
                               icon: FontAwesomeIcons.pen,

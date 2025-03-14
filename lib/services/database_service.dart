@@ -25,6 +25,12 @@ class DatabaseService {
     await _artistsRef.add(artist);
   }
 
+  void updateArtist(String artistId, Artist updatedArtist) async {
+    print('updated artist');
+    print(updatedArtist.gender);
+    await _artistsRef.doc(artistId).update(updatedArtist.toJson());
+  }
+
   void deleteArtist(String artistId) async {
     _artistsRef.doc(artistId).delete();
   }
