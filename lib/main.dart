@@ -21,6 +21,11 @@ Future<void> main() async {
           backgroundColor: kColorScheme.primary,
           foregroundColor: kColorScheme.onPrimary,
         ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData().copyWith(
+          backgroundColor: kColorScheme.primary,
+          foregroundColor: kColorScheme.onPrimary,
+          shape: CircleBorder(),
+        ),
       ),
       home: ArtistryHub(),
     ),
