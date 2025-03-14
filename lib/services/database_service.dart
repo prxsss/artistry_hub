@@ -24,4 +24,8 @@ class DatabaseService {
   void addArtist(Artist artist) async {
     await _artistsRef.add(artist);
   }
+
+  void deleteArtist(String artistId) async {
+    _artistsRef.doc(artistId).delete();
+  }
 }

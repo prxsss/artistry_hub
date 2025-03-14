@@ -48,6 +48,9 @@ Future<void> main() async {
             foregroundColor: kColorScheme.onPrimary,
           ),
         ),
+        dialogTheme: DialogTheme().copyWith(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        ),
       ),
       home: ArtistryHub(),
     ),

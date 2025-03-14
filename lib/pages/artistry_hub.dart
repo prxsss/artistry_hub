@@ -54,7 +54,39 @@ class _ArtistryHubState extends State<ArtistryHub> {
                               label: "Edit",
                             ),
                             SlidableAction(
-                              onPressed: (context) {},
+                              onPressed: (context) {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                        'Delete Artist',
+                                        style: TextStyle(fontSize: 18),
+                                      ),
+                                      content: Text(
+                                        'Are you sure you want to delete the artist ${artist.name}?',
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('No'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            _databaseService.deleteArtist(
+                                              artistId,
+                                            );
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('Yes'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
                               backgroundColor:
                                   Theme.of(context).colorScheme.error,
                               icon: FontAwesomeIcons.trash,
