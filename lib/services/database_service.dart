@@ -1,7 +1,7 @@
 import 'package:artistry_hub/models/artist.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-const kArtistCollection = 'artists';
+const kArtistCollection = 'Artists';
 
 class DatabaseService {
   final _firestore = FirebaseFirestore.instance;

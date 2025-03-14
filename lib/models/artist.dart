@@ -23,7 +23,9 @@ class Artist {
   Artist.fromJson(Map<String, Object?> json)
     : this(
         name: json['name']! as String,
-        gender: Gender.values[json['gender']! as int],
+        gender: Gender.values.firstWhere(
+          (e) => e.toString().split('.').last == json['gender'] as String,
+        ),
         image: json['image']! as String,
         nationality: json['nationality']! as String,
         outstandingAchievement: json['outstandingAchievement']! as String,

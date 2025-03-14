@@ -1,8 +1,8 @@
+import 'package:artistry_hub/models/artist.dart';
+import 'package:artistry_hub/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import 'package:artistry_hub/data/artists.dart';
 
 class ArtistryHub extends StatefulWidget {
   const ArtistryHub({super.key});
@@ -12,6 +12,8 @@ class ArtistryHub extends StatefulWidget {
 }
 
 class _ArtistryHubState extends State<ArtistryHub> {
+  final DatabaseService _databaseService = DatabaseService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,58 +22,70 @@ class _ArtistryHubState extends State<ArtistryHub> {
         child: Column(
           children: [
             const SizedBox(height: 5),
-            ListView.separated(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: artists.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 5,
-                  ),
-                  child: Slidable(
-                    endActionPane: ActionPane(
-                      motion: StretchMotion(),
-                      children: [
-                        SlidableAction(
-                          onPressed: (context) {},
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          icon: FontAwesomeIcons.pen,
-                          label: "Edit",
+            StreamBuilder(
+              stream: _databaseService.getArtists(),
+              builder: (context, snapshot) {
+                List artists = snapshot.data?.docs ?? [];
+                if (artists.isEmpty) {
+                  return const Center(child: Text("No artists found"));
+                }
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: artists.length,
+                  itemBuilder: (context, index) {
+                    String artistId = artists[index].id;
+                    Artist artist = artists[index].data();
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 5,
+                      ),
+                      child: Slidable(
+                        endActionPane: ActionPane(
+                          motion: StretchMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {},
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.primary,
+                              icon: FontAwesomeIcons.pen,
+                              label: "Edit",
+                            ),
+                            SlidableAction(
+                              onPressed: (context) {},
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.error,
+                              icon: FontAwesomeIcons.trash,
+                              label: "Delete",
+                            ),
+                          ],
                         ),
-                        SlidableAction(
-                          onPressed: (context) {},
-                          backgroundColor: Theme.of(context).colorScheme.error,
-                          icon: FontAwesomeIcons.trash,
-                          label: "Delete",
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(artists[index].image),
+                        child: ListTile(
+                          leading: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(artist.image),
+                              ),
+                            ),
+                          ),
+                          title: Text(artist.name),
+                          subtitle: Row(
+                            children: [
+                              FaIcon(FontAwesomeIcons.solidFlag, size: 15),
+                              SizedBox(width: 10),
+                              Text(artist.nationality),
+                            ],
                           ),
                         ),
                       ),
-                      title: Text(artists[index].name),
-                      subtitle: Row(
-                        children: [
-                          FaIcon(FontAwesomeIcons.solidFlag, size: 15),
-                          SizedBox(width: 10),
-                          Text(artists[index].nationality),
-                        ],
-                      ),
-                    ),
-                  ),
+                    );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
                 );
               },
-              separatorBuilder: (context, index) => const Divider(),
             ),
           ],
         ),
