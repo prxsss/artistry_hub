@@ -26,8 +26,6 @@ class DatabaseService {
   }
 
   void updateArtist(String artistId, Artist updatedArtist) async {
-    print('updated artist');
-    print(updatedArtist.gender);
     await _artistsRef.doc(artistId).update(updatedArtist.toJson());
   }
 
