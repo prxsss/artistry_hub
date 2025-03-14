@@ -19,4 +19,48 @@ class Artist {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  Artist.fromJson(Map<String, Object?> json)
+    : this(
+        name: json['name']! as String,
+        gender: Gender.values[json['gender']! as int],
+        image: json['image']! as String,
+        nationality: json['nationality']! as String,
+        outstandingAchievement: json['outstandingAchievement']! as String,
+        createdAt: json['createdAt']! as Timestamp,
+        updatedAt: json['updatedAt']! as Timestamp,
+      );
+
+  Artist copyWith({
+    String? name,
+    Gender? gender,
+    String? image,
+    String? nationality,
+    String? outstandingAchievement,
+    Timestamp? createdAt,
+    Timestamp? updatedAt,
+  }) {
+    return Artist(
+      name: name ?? this.name,
+      gender: gender ?? this.gender,
+      image: image ?? this.image,
+      nationality: nationality ?? this.nationality,
+      outstandingAchievement:
+          outstandingAchievement ?? this.outstandingAchievement,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  Map<String, Object?> toJson() {
+    return {
+      'name': name,
+      'gender': gender.index,
+      'image': image,
+      'nationality': nationality,
+      'outstandingAchievement': outstandingAchievement,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+    };
+  }
 }
