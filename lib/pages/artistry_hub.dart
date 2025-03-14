@@ -1,4 +1,5 @@
 import 'package:artistry_hub/models/artist.dart';
+import 'package:artistry_hub/pages/add_artist_page.dart';
 import 'package:artistry_hub/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -91,7 +92,12 @@ class _ArtistryHubState extends State<ArtistryHub> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddArtistPage()),
+          );
+        },
         child: FaIcon(FontAwesomeIcons.plus),
       ),
     );

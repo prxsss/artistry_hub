@@ -26,6 +26,28 @@ Future<void> main() async {
           foregroundColor: kColorScheme.onPrimary,
           shape: CircleBorder(),
         ),
+        inputDecorationTheme: InputDecorationTheme().copyWith(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 8,
+          ),
+          filled: true,
+          fillColor: kColorScheme.secondaryContainer,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(6),
+            borderSide: BorderSide(color: kColorScheme.primary),
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kColorScheme.primary,
+            foregroundColor: kColorScheme.onPrimary,
+          ),
+        ),
       ),
       home: ArtistryHub(),
     ),
