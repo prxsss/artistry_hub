@@ -18,7 +18,7 @@ class DatabaseService {
   }
 
   Stream<QuerySnapshot> getArtists() {
-    return _artistsRef.snapshots();
+    return _artistsRef.orderBy('createdAt', descending: true).snapshots();
   }
 
   void addArtist(Artist artist) async {
