@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:artistry_hub/data/artists.dart';
+
 class ArtistryHub extends StatefulWidget {
   const ArtistryHub({super.key});
 
@@ -17,7 +19,7 @@ class _ArtistryHubState extends State<ArtistryHub> {
       body: Padding(
         padding: const EdgeInsets.all(14),
         child: ListView.separated(
-          itemCount: 5,
+          itemCount: artists.length,
           itemBuilder: (context, index) {
             return Slidable(
               endActionPane: ActionPane(
@@ -43,18 +45,16 @@ class _ArtistryHubState extends State<ArtistryHub> {
                   height: 50,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(
-                        'https://avatar.iran.liara.run/public/boy?username=Leonardo_da_Vinci',
-                      ),
+                      image: NetworkImage(artists[index].image),
                     ),
                   ),
                 ),
-                title: const Text("Leonardo da Vinci"),
+                title: Text(artists[index].name),
                 subtitle: Row(
-                  children: const [
+                  children: [
                     FaIcon(FontAwesomeIcons.solidFlag, size: 15),
                     SizedBox(width: 10),
-                    Text("Italian"),
+                    Text(artists[index].nationality),
                   ],
                 ),
               ),
