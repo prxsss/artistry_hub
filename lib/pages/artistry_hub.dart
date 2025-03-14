@@ -28,7 +28,10 @@ class _ArtistryHubState extends State<ArtistryHub> {
               builder: (context, snapshot) {
                 List artists = snapshot.data?.docs ?? [];
                 if (artists.isEmpty) {
-                  return const Center(child: Text("No artists found"));
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height - 100,
+                    child: const Center(child: Text("No artists found")),
+                  );
                 }
                 return ListView.separated(
                   shrinkWrap: true,
